@@ -51,7 +51,6 @@ public class MesaController {
 	//update a mesa register
 	
 	@PutMapping("/{id}")
-	
 	public ResponseEntity<?> update(@RequestBody Mesa mesaDetails,@PathVariable(value="id")  Long id)
 	{
 		Optional<Mesa> oMesa = mesainterface.findById(id);
