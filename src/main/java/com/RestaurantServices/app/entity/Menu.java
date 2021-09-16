@@ -28,7 +28,7 @@ public class Menu {
 	@Column(name = "precio")
 	private float precio;
 	@Lob
-	@Column(name = "imagen",columnDefinition = "bytea")
+	@Column(name = "imagen",columnDefinition = "bigint")
 	private byte[] imagen;
 	
 	
