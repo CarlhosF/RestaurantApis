@@ -4,6 +4,8 @@ package com.RestaurantServices.app.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -14,12 +16,14 @@ import javax.persistence.Table;
 @Entity
 @Table (name="menus")
 public class Menu {
+	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	@Column(name = "codigo",length = 30)
 	private String codigo;
-	@Column(name = "categoria",length = 40)
+	@Column(name = "categoria",length = 30)
 	private String categoria;
 	@Column(name = "descripcion",length = 60)
 	private String descripcion;
