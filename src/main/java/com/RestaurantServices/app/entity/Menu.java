@@ -6,10 +6,13 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 
@@ -23,8 +26,9 @@ public class Menu {
 	private long id;
 	@Column(name = "codigo",length = 30)
 	private String codigo;
-	@Column(name = "categoria",length = 30)
-	private String categoria;
+	@OneToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name="categoria", referencedColumnName = "id")
+	private Categoria categoria;
 	@Column(name = "descripcion",length = 60)
 	private String descripcion;
 	@Column(name = "nombre",length = 40)
@@ -39,7 +43,7 @@ public class Menu {
 	public Menu() {
 		super();
 	}
-	public Menu(String codigo, String categoria, String descripcion, String nombre, float precio, byte[] imagen) {
+	public Menu(String codigo, Categoria categoria, String descripcion, String nombre, float precio, byte[] imagen) {
 		super();
 		this.codigo = codigo;
 		this.categoria = categoria;
@@ -62,10 +66,10 @@ public class Menu {
 	public void setCodigo(String codigo) {
 		this.codigo = codigo;
 	}
-	public String getCategoria() {
+	public Categoria getCategoria() {
 		return categoria;
 	}
-	public void setCategoria(String categoria) {
+	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
 	}
 	public String getDescripcion() {

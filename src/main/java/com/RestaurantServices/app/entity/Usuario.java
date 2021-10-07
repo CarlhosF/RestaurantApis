@@ -5,11 +5,11 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
+
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -28,12 +28,8 @@ public class Usuario implements Serializable{
 	private String username;
 	@Column(name = "password")
 	private String password;
-	@Column(name = "rol")
-	private String rol;
 	
-	
-	@OneToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name="empleado", referencedColumnName = "id")
+	@OneToOne(mappedBy = "usuario")
 	private Empleado empleado;
 	
 
@@ -41,12 +37,11 @@ public class Usuario implements Serializable{
 		super();
 	}
 
-	public Usuario(String username, String password, String rol, Empleado empleado) {
+	public Usuario(String username, String password) {
 		super();
 		this.username = username;
 		this.password = password;
-		this.rol = rol;
-		this.empleado = empleado;
+		
 	}
 	
 	public boolean Validar(String usen,String pass) 
@@ -83,21 +78,7 @@ public class Usuario implements Serializable{
 		this.password = password;
 	}
 
-	public String getRol() {
-		return rol;
-	}
 
-	public void setRol(String rol) {
-		this.rol = rol;
-	}
-
-	public Empleado getEmpleado() {
-		return empleado;
-	}
-
-	public void setEmpleado(Empleado empleado) {
-		this.empleado = empleado;
-	}
 	
 	
 	

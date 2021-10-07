@@ -5,9 +5,11 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -21,6 +23,19 @@ public class Empleado implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
@@ -35,7 +50,8 @@ public class Empleado implements Serializable {
 	@Column(name = "telefono")
 	private String telefono;
 	
-	@OneToOne(mappedBy = "empleado")
+	@OneToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name="usuario", referencedColumnName = "id")
 	private Usuario usuario;
 	
 
@@ -44,17 +60,20 @@ public class Empleado implements Serializable {
 	}
 	
 	
-	public Empleado(String nombres, String apellidos, String direccion, String dUI, String telefono) {
+	
+	
+	
+	public Empleado(String nombres, String apellidos, String direccion, String dUI, String telefono, Usuario usuario) {
 		super();
 		this.nombres = nombres;
 		this.apellidos = apellidos;
 		this.direccion = direccion;
 		DUI = dUI;
 		this.telefono = telefono;
-		
+		this.usuario = usuario;
 	}
-	
-	
+
+
 	public long getId() {
 		return id;
 	}
