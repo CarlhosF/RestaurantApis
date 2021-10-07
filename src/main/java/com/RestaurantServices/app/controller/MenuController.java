@@ -31,7 +31,7 @@ public class MenuController {
 	
 	@PostMapping
 	public ResponseEntity<?> create (@RequestBody Menu menu)
-	{
+	{		
 		return ResponseEntity.status(HttpStatus.CREATED).body(menuinterface.Save(menu));
 	}
 	
@@ -53,13 +53,13 @@ public class MenuController {
 	//update a mesa register
 	
 		@PutMapping("/{id}")
-		public ResponseEntity<?> update(@RequestBody Menu mesaDetails,@PathVariable(value="id")  Long id)
+		public ResponseEntity<?> update(@RequestBody Menu menuDetails,@PathVariable(value="id")  Long id)
 		{
 			Optional<Menu> oMesa = menuinterface.findById(id);
 			
 			if(oMesa.isPresent()) 
 			{
-				oMesa.get().setCodigo(mesaDetails.getCodigo());
+				oMesa.get().setCodigo(menuDetails.getCodigo());
 				return ResponseEntity.status(HttpStatus.CREATED).body(menuinterface.Save(oMesa.get()));
 			}
 			else {

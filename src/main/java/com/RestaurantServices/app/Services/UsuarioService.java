@@ -8,8 +8,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.RestaurantServices.app.Repository.EmpleadoRepository;
 import com.RestaurantServices.app.Repository.UsuarioRepository;
-
+import com.RestaurantServices.app.entity.Empleado;
 import com.RestaurantServices.app.entity.Usuario;
 
 @Service
@@ -17,7 +18,7 @@ public class UsuarioService implements UsuarioInterface{
 
 	@Autowired
 	private UsuarioRepository mesaRepository;
-	
+
 
 	@Override
 	@Transactional(readOnly = true)
@@ -35,9 +36,11 @@ public class UsuarioService implements UsuarioInterface{
 
 	@Override
 	@Transactional(readOnly = true)
-	public Optional<Usuario> findById(long id) {
+	public Optional<Usuario> findById(long id){
 		// TODO Auto-generated method stub
-		return mesaRepository.findById(id);
+		Optional<Usuario> u = mesaRepository.findById(id);
+		return u;
+		
 	}
 
 	@Override

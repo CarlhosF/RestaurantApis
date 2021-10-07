@@ -1,6 +1,8 @@
 package com.RestaurantServices.app.entity;
 
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -13,8 +15,12 @@ import javax.persistence.Table;
 
 @Entity
 @Table (name="usuario")
-public class Usuario {
+public class Usuario implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
@@ -26,8 +32,8 @@ public class Usuario {
 	private String rol;
 	
 	
-	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="empleado")
+	@OneToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name="empleado", referencedColumnName = "id")
 	private Empleado empleado;
 	
 
@@ -41,6 +47,16 @@ public class Usuario {
 		this.password = password;
 		this.rol = rol;
 		this.empleado = empleado;
+	}
+	
+	public boolean Validar(String usen,String pass) 
+	{
+		if(this.password==pass && this.username==usen) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	public long getId() {
