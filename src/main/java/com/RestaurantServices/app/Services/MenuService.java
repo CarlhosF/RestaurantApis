@@ -1,5 +1,6 @@
 package com.RestaurantServices.app.Services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,12 @@ public class MenuService implements MenuInterface {
 		// TODO Auto-generated method stub
 		return menuRepository.findAll();
 	}
+	@Override
+	@Transactional(readOnly = true)
+	public List<Menu> forCategory(long id){
+		// TODO Auto-generated method stub
+		return menuRepository.forCategory(id);
+	}
 
 	@Override
 	@Transactional(readOnly = true)
@@ -29,6 +36,7 @@ public class MenuService implements MenuInterface {
 		// TODO Auto-generated method stub
 		return menuRepository.findAll(pageable);
 	}
+	
 
 	@Override
 	@Transactional(readOnly = true)

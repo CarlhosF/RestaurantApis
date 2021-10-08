@@ -50,7 +50,14 @@ public class MenuController {
 			return ResponseEntity.notFound().build();
 		}
 	}
-	//update a mesa register
+	@GetMapping("/categoria/{id}")
+	public List<Menu> searchWithCategory(@PathVariable(value="id")  Long id)
+	{
+		List<Menu> oMenu = menuinterface.forCategory(id);
+		
+		return oMenu;
+	}
+	//
 	
 		@PutMapping("/{id}")
 		public ResponseEntity<?> update(@RequestBody Menu menuDetails,@PathVariable(value="id")  Long id)

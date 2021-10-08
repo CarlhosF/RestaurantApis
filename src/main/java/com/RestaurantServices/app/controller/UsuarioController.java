@@ -31,20 +31,20 @@ public class UsuarioController {
 	
 	
 	@PostMapping
-	public ResponseEntity<?> create (@RequestBody Usuario mesa){
-		return ResponseEntity.status(HttpStatus.CREATED).body(mesainterface.Save(mesa));
+	public ResponseEntity<?> create (@RequestBody Usuario usuario){
+		return ResponseEntity.status(HttpStatus.CREATED).body(mesainterface.Save(usuario));
 	}
 	
 	
 	@GetMapping("/{id}")
 	public ResponseEntity<?> read(@PathVariable(value="id")  Long id)
 	{
-		Optional<Usuario> oMesa = mesainterface.findById(id);
+		Optional<Usuario> oUsuario = mesainterface.findById(id);
 		 
 		
-		if(oMesa.isPresent()) 
+		if(oUsuario.isPresent()) 
 		{
-			return ResponseEntity.ok(oMesa);
+			return ResponseEntity.ok(oUsuario);
 		}
 		else {
 		
@@ -90,10 +90,10 @@ public class UsuarioController {
 	@GetMapping
 	public List<Usuario> readAll()
 	{
-		List<Usuario> mesas= StreamSupport
+		List<Usuario> usuarios= StreamSupport
 				.stream(mesainterface.findAll().spliterator(), false)
 				.collect(Collectors.toList());
 				
-		return mesas;
+		return usuarios;
 	}
 }
