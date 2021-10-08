@@ -56,7 +56,12 @@ public class Empleado implements Serializable {
 	
 
 	public Empleado() {
-		
+		this.nombres = "";
+		this.apellidos = "";
+		this.direccion = "";
+		DUI = "";
+		this.telefono = "";
+		this.usuario = new Usuario();
 	}
 	
 	

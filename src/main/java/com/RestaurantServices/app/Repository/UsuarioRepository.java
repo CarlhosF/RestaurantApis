@@ -11,6 +11,5 @@ import com.RestaurantServices.app.entity.Usuario;
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 
-	//@Query(value = "Select a from usuarios a where a.username=?1 and a.password=?2")
-	//public Optional<Usuario> Login(String username, String password);
+	
 }

@@ -1,7 +1,10 @@
 package com.RestaurantServices.app.controller;
 
+import java.io.Console;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Optional;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -18,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.RestaurantServices.app.Services.EmpleadoInterface;
 import com.RestaurantServices.app.entity.Empleado;
+import com.RestaurantServices.app.entity.Usuario;
 
 
 
@@ -71,5 +75,37 @@ public class EmpleadoController {
 				.collect(Collectors.toList());
 				
 		return empleados;
+	}
+	
+	@GetMapping("/login")
+	public Empleado login(@RequestBody Usuario usuario)
+	{
+		Empleado e =new Empleado();
+		List<Empleado> empleados= StreamSupport
+				.stream(empleadoInterface.findAll().spliterator(), false)
+				.collect(Collectors.toList());
+			
+		for(Empleado emp:empleados)
+		{
+						
+			if(emp.getUsuario().getUsername().equals(usuario.getUsername()) && emp.getUsuario().getPassword().equals(usuario.getPassword())) 
+			{
+				e.setApellidos(emp.getApellidos());
+				e.setDireccion(emp.getDireccion());
+				e.setDUI(emp.getDUI());
+				e.setId(emp.getId());
+				e.setNombres(emp.getNombres());
+				e.setTelefono(emp.getTelefono());
+				e.getUsuario().setId(emp.getUsuario().getId());
+				e.getUsuario().setPassword(emp.getUsuario().getPassword());
+				e.getUsuario().setUsername(emp.getUsuario().getUsername());
+				
+			}
+			
+			
+		}
+		
+				
+		return e;
 	}
 }
