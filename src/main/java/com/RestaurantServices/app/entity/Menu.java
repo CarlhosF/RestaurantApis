@@ -14,6 +14,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -30,7 +32,7 @@ public class Menu implements Serializable {
 	private long id;
 	@Column(name = "codigo",length = 30)
 	private String codigo;
-	@OneToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="categoria", referencedColumnName = "id")
 	private Categoria categoria;
 	@Column(name = "descripcion",length = 60)
