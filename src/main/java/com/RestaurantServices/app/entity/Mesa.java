@@ -14,15 +14,15 @@ public class Mesa {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	@Column(name = "codigo",length = 30)
-	private String codigo;
+	@Column(name = "numero",length = 30)
+	private String numero;
 	
 	public Mesa() {
 		
 	}
 	public Mesa(String codigo) {
 		super();
-		this.codigo = codigo;
+		this.numero = codigo;
 	}
 	
 	public long getId() {
@@ -32,10 +32,10 @@ public class Mesa {
 		this.id = id;
 	}
 	public String getCodigo() {
-		return codigo;
+		return numero;
 	}
 	public void setCodigo(String codigo) {
-		this.codigo = codigo;
+		this.numero = codigo;
 	}
 	
 }

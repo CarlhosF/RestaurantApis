@@ -6,8 +6,7 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
+
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,8 +14,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 
@@ -30,8 +27,6 @@ public class Menu implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	@Column(name = "codigo",length = 30)
-	private String codigo;
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="categoria", referencedColumnName = "id")
 	private Categoria categoria;
@@ -49,9 +44,9 @@ public class Menu implements Serializable {
 	public Menu() {
 		super();
 	}
-	public Menu(String codigo, Categoria categoria, String descripcion, String nombre, float precio, byte[] imagen) {
+	public Menu( Categoria categoria, String descripcion, String nombre, float precio, byte[] imagen) {
 		super();
-		this.codigo = codigo;
+	
 		this.categoria = categoria;
 		this.descripcion = descripcion;
 		this.nombre = nombre;
@@ -66,12 +61,7 @@ public class Menu implements Serializable {
 	public void setId(long id) {
 		this.id = id;
 	}
-	public String getCodigo() {
-		return codigo;
-	}
-	public void setCodigo(String codigo) {
-		this.codigo = codigo;
-	}
+
 	public Categoria getCategoria() {
 		return categoria;
 	}

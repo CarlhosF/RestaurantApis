@@ -66,7 +66,7 @@ public class MenuController {
 			
 			if(oMesa.isPresent()) 
 			{
-				oMesa.get().setCodigo(menuDetails.getCodigo());
+				
 				return ResponseEntity.status(HttpStatus.CREATED).body(menuinterface.Save(oMesa.get()));
 			}
 			else {
