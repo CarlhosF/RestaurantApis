@@ -1,6 +1,5 @@
 package com.RestaurantServices.app.controller;
 
-import java.util.List;
 import java.util.stream.*;
 import java.util.*;
 
@@ -57,7 +56,7 @@ public class MesaController {
 		
 		if(oMesa.isPresent()) 
 		{
-			oMesa.get().setCodigo(mesaDetails.getCodigo());
+			oMesa.get().setId(mesaDetails.getId());
 			return ResponseEntity.status(HttpStatus.CREATED).body(mesainterface.Save(oMesa.get()));
 		}
 		else {

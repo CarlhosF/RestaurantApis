@@ -24,7 +24,8 @@ public class Usuario implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	@Column(name = "username")
+	///unique definimos que no se va repetir usuario
+	@Column(name = "username", unique = true)
 	private String username;
 	@Column(name = "password")
 	private String password;

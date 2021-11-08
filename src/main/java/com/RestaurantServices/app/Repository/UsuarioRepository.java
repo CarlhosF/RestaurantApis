@@ -10,6 +10,5 @@ import com.RestaurantServices.app.entity.Usuario;
 
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
-
 	
 }

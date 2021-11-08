@@ -7,6 +7,8 @@ import org.springframework.data.domain.Pageable;
 
 import com.RestaurantServices.app.entity.Usuario;
 
+import java.util.List;
+
 
 
 public interface UsuarioInterface {
@@ -21,5 +23,5 @@ public Iterable<Usuario> findAll();
 	
 	public void deleteById(long id);
 	
-	
+	public boolean verifyUser(Usuario usuario);
 }

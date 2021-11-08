@@ -96,4 +96,14 @@ public class UsuarioController {
 				
 		return usuarios;
 	}
+	@GetMapping("/login")
+	public boolean login(@RequestBody Usuario usuario) {
+		boolean verificar = false;
+		if (mesainterface.verifyUser(usuario)) {
+			/*usuario.getUsername();
+			usuario.getPassword();*/
+			return !verificar;
+		}
+		return verificar;
+	}
 }

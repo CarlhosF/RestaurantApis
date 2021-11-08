@@ -1,6 +1,11 @@
 package com.RestaurantServices.app.Services;
 
+import java.util.List;
 import java.util.Optional;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceContexts;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -18,6 +23,9 @@ public class UsuarioService implements UsuarioInterface{
 
 	@Autowired
 	private UsuarioRepository mesaRepository;
+	
+	@PersistenceContext
+	EntityManager entityManager;
 
 
 	@Override
@@ -56,7 +64,17 @@ public class UsuarioService implements UsuarioInterface{
 		// TODO Auto-generated method stub
 		mesaRepository.deleteById(id);
 	}
-
-
+	@Override
+	@Transactional(readOnly = true)
+	public boolean verifyUser(Usuario usuario) {
+		String query = "FROM Usuario WHERE username = :username AND password = :password";
+		
+		List<Usuario> lstUser =  entityManager.createQuery(query, Usuario.class)
+				.setParameter("username", usuario.getUsername())
+				.setParameter("password", usuario.getPassword())
+				.getResultList();
+		
+		return !lstUser.isEmpty();
+	}
 
 }
