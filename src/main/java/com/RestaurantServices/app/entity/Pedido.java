@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -31,8 +32,8 @@ public class Pedido implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
-	/*@OneToMany(mappedBy = "detalles_pedidos")
-	private List<Detalle_pedido> detalle_pedido;*/
+	@OneToMany(fetch = FetchType.LAZY,mappedBy = "pedido",cascade = CascadeType.ALL)
+	private List<Detalle_pedido> detalle_pedido;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "empleado", referencedColumnName = "id", nullable = false)
@@ -56,16 +57,45 @@ public class Pedido implements Serializable{
 		super();
 	}
 
-	public Pedido(long id, Empleado empleado, Mesa mesa, Date fecha_pedido, String observacion, Estado estado) {
+
+	
+	public Pedido(List<Detalle_pedido> detalle_pedido, Empleado empleado, Mesa mesa, Date fecha_pedido,
+			String observacion, Estado estado) {
 		super();
-		this.id = id;
+		
 		this.empleado = empleado;
 		this.mesa = mesa;
 		Fecha_pedido = fecha_pedido;
 		this.observacion = observacion;
 		this.estado = estado;
+		
+//		for (Detalle_pedido item : detalle_pedido) {
+//			item.setIdpedido(this);
+//		}
+		
+		this.detalle_pedido = detalle_pedido;
 	}
-	
+
+
+
+	public List<Detalle_pedido> getDetalle_pedido() {
+		return detalle_pedido;
+	}
+
+
+
+	public void setDetalle_pedido(List<Detalle_pedido> detalle_pedido) {
+		this.detalle_pedido = detalle_pedido;
+	}
+
+
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+
+
 	public long getId() {
 		return id;
 	}

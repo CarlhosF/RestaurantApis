@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.RestaurantServices.app.Services.PedidoInterface;
+import com.RestaurantServices.app.Services.PedidoService;
 import com.RestaurantServices.app.entity.Pedido;
 
 @RestController
@@ -25,10 +26,11 @@ import com.RestaurantServices.app.entity.Pedido;
 public class PedidoController {
 	///Inyección de dependencia
 	@Autowired
-	private PedidoInterface pedidoInterface;
+	private PedidoService pedidoInterface;
 	
 	@PostMapping
 	public ResponseEntity<?> create (@RequestBody Pedido pedi){
+		
 		return ResponseEntity.status(HttpStatus.CREATED).body(pedidoInterface.Save(pedi));
 	}
 	
@@ -36,6 +38,9 @@ public class PedidoController {
 	public ResponseEntity<?> read(@PathVariable(value="id") Long id)
 	{
 		Optional<Pedido> oPedido = pedidoInterface.findById(id);
+		
+		
+		
 		if(oPedido.isPresent()) {
 			
 			return ResponseEntity.ok(oPedido);
@@ -82,11 +87,16 @@ public class PedidoController {
 		@GetMapping
 		public List<Pedido> readAll()
 		{
-			List<Pedido> pedido= StreamSupport
+			
+			
+			List<Pedido> pedidos= StreamSupport
 					.stream(pedidoInterface.findAll().spliterator(), false)
 					.collect(Collectors.toList());
 					
-			return pedido;
+			for (Pedido pedido : pedidos) {
+				pedido.setDetalle_pedido(null);
+			}
+			return pedidos;
 		}
 	}
 
