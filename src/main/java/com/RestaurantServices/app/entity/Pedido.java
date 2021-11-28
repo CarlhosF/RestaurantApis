@@ -19,6 +19,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name = "pedidos")
 public class Pedido implements Serializable{
@@ -32,7 +34,8 @@ public class Pedido implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
-	@OneToMany(fetch = FetchType.LAZY,mappedBy = "pedido",cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.EAGER,mappedBy = "pedido",cascade = CascadeType.ALL)
+	@JsonIgnoreProperties("pedido")
 	private List<Detalle_pedido> detalle_pedido;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
@@ -70,12 +73,6 @@ public class Pedido implements Serializable{
 	public String getCliente() {
 		return cliente;
 	}
-
-
-
-
-
-
 
 	public void setCliente(String cliente) {
 		this.cliente = cliente;

@@ -24,6 +24,10 @@ public class PedidoService{
 	public Iterable<Pedido> findAll(){
 		return pedidoRepository.findAll();
 	}
+	@Transactional(readOnly = true)
+	public Iterable<Pedido> findListos(){
+		return pedidoRepository.Listos();
+	}
 	//@Override
 	public Page<Pedido> findAll(Pageable pageable){
 		return pedidoRepository.findAll(pageable);
@@ -45,12 +49,21 @@ public class PedidoService{
 		pedidoAux.setObservacion(pedido.getObservacion());
 		pedidoAux.setCliente(pedido.getCliente());
 		List<Detalle_pedido> detalles=pedido.getDetalle_pedido();
+		
 		for (Detalle_pedido item : detalles) {
 			item.setIdpedido(pedidoAux);
 		}
 		pedidoAux.setDetalle_pedido(detalles);
 		
 		return pedidoRepository.save(pedidoAux);
+					
+		
+	}
+	@Transactional(readOnly = false)
+	public Pedido Update(Pedido pedido) {
+		
+				
+		return pedidoRepository.save(pedido);
 					
 		
 	}

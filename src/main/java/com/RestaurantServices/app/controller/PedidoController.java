@@ -17,9 +17,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.RestaurantServices.app.Services.PedidoInterface;
 import com.RestaurantServices.app.Services.PedidoService;
 import com.RestaurantServices.app.entity.Pedido;
+
+import javassist.expr.NewArray;
 
 @RestController
 @RequestMapping("/api/pedido")
@@ -27,6 +28,7 @@ public class PedidoController {
 	///Inyección de dependencia
 	@Autowired
 	private PedidoService pedidoInterface;
+	private List<Pedido> pedidosListos;
 	
 	@PostMapping
 	public ResponseEntity<?> create (@RequestBody Pedido pedi){
@@ -39,7 +41,7 @@ public class PedidoController {
 	{
 		Optional<Pedido> oPedido = pedidoInterface.findById(id);
 		
-		
+		oPedido.get().setDetalle_pedido(null);
 		
 		if(oPedido.isPresent()) {
 			
@@ -58,11 +60,11 @@ public class PedidoController {
 		
 		if(oPedido.isPresent()) 
 		{
-			oPedido.get().setEmpleado(pedido.getEmpleado());
-			oPedido.get().setMesa(pedido.getMesa());
-			oPedido.get().setFecha_pedido(pedido.getFecha_pedido());
-			oPedido.get().setMesa(pedido.getMesa());
-			return ResponseEntity.status(HttpStatus.CREATED).body(pedidoInterface.Save(oPedido.get()));
+			
+			oPedido.get().setEstado(pedido.getEstado());	
+			pedido=pedidoInterface.Update(oPedido.get());
+			pedido.setDetalle_pedido(null);
+			return ResponseEntity.status(HttpStatus.CREATED).body(pedido);
 		}
 		else 
 		{
@@ -91,6 +93,20 @@ public class PedidoController {
 			
 			List<Pedido> pedidos= StreamSupport
 					.stream(pedidoInterface.findAll().spliterator(), false)
+					.collect(Collectors.toList());
+					
+			for (Pedido pedido : pedidos) {
+				pedido.setDetalle_pedido(null);
+			}
+			return pedidos;
+		}
+		@GetMapping("/Listos")
+		public List<Pedido> readEntregados()
+		{
+			
+			
+			List<Pedido> pedidos= StreamSupport
+					.stream(pedidoInterface.findListos().spliterator(), false)
 					.collect(Collectors.toList());
 					
 			for (Pedido pedido : pedidos) {

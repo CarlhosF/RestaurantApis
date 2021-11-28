@@ -31,7 +31,7 @@ public class Detalle_pedido implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
-	@ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.REMOVE)
+	@ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.REMOVE)
 	@JoinColumn(name = "IDPEDIDO",nullable = false,referencedColumnName = "id")
 	private Pedido pedido;
 	
