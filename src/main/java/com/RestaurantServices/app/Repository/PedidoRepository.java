@@ -13,6 +13,6 @@ import com.RestaurantServices.app.entity.Pedido;
 @Repository
 public interface PedidoRepository extends JpaRepository<Pedido, Long>{
 
-	@Query(value = "SELECT * FROM pedidos  a where a.estado= 'LISTO' ", nativeQuery = true)
+	@Query(value = "SELECT * FROM pedidos  a where a.estado= 'LISTO' OR a.estado= 'PENDIENTE' ", nativeQuery = true)
 	List<Pedido> Listos();
 }
