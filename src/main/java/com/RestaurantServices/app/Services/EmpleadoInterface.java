@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import com.RestaurantServices.app.entity.Empleado;
+import com.RestaurantServices.app.entity.Usuario;
 
 
 
@@ -20,4 +21,6 @@ public interface EmpleadoInterface {
 	public Empleado Save(Empleado empleado);
 	
 	public void deleteById(long id);
+	
+	public Empleado getUserById(long id);
 }

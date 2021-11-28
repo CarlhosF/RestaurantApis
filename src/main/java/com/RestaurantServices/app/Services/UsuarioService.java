@@ -66,7 +66,7 @@ public class UsuarioService implements UsuarioInterface{
 	}
 	@Override
 	@Transactional(readOnly = true)
-	public boolean verifyUser(Usuario usuario) {
+	public Usuario verifyUser(Usuario usuario) {
 		String query = "FROM Usuario WHERE username = :username AND password = :password";
 		
 		List<Usuario> lstUser =  entityManager.createQuery(query, Usuario.class)
@@ -74,7 +74,12 @@ public class UsuarioService implements UsuarioInterface{
 				.setParameter("password", usuario.getPassword())
 				.getResultList();
 		
-		return !lstUser.isEmpty();
+		if(lstUser.isEmpty()) {
+			return null;
+		}else {
+			return lstUser.get(0);
+		}
+		 
 	}
 
 }

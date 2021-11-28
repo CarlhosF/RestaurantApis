@@ -36,7 +36,7 @@ public class Detalle_pedido implements Serializable{
 	private Pedido pedido;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "menu", referencedColumnName = "id", nullable = false)
+	@JoinColumn(name = "menu", referencedColumnName = "id", nullable = true)
 	private Menu menu;
 	
 	@Column(name = "cantidad", nullable = false)

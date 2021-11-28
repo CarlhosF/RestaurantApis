@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.RestaurantServices.app.Repository.EmpleadoRepository;
 import com.RestaurantServices.app.entity.Empleado;
+import com.RestaurantServices.app.entity.Usuario;
 
 @Service
 public class EmpleadoService implements EmpleadoInterface{
@@ -44,6 +45,11 @@ public class EmpleadoService implements EmpleadoInterface{
 	public void deleteById(long id) {
 		// TODO Auto-generated method stub
 		empleadoRepository.deleteById(id);
+	}
+	
+	@Override
+	public Empleado getUserById(long id) {
+		return empleadoRepository.getUsuario(id);
 	}
 
 }

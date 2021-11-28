@@ -43,6 +43,7 @@ public class PedidoService{
 		pedidoAux.setFecha_pedido(pedido.getFecha_pedido());
 		pedidoAux.setMesa(pedido.getMesa());
 		pedidoAux.setObservacion(pedido.getObservacion());
+		pedidoAux.setCliente(pedido.getCliente());
 		List<Detalle_pedido> detalles=pedido.getDetalle_pedido();
 		for (Detalle_pedido item : detalles) {
 			item.setIdpedido(pedidoAux);

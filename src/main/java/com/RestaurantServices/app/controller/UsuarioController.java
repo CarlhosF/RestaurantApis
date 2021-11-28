@@ -96,14 +96,16 @@ public class UsuarioController {
 				
 		return usuarios;
 	}
-	@GetMapping("/login")
-	public boolean login(@RequestBody Usuario usuario) {
-		boolean verificar = false;
-		if (mesainterface.verifyUser(usuario)) {
+	@PostMapping("/login")
+	public ResponseEntity<?> login(@RequestBody Usuario usuario) {
+		///boolean verificar = false;
+		 Usuario u = mesainterface.verifyUser(usuario);
+		if (u != null) {
 			/*usuario.getUsername();
 			usuario.getPassword();*/
-			return !verificar;
+			usuario.getId();
+			return ResponseEntity.status(HttpStatus.ACCEPTED).body(u);
 		}
-		return verificar;
+		return ResponseEntity.notFound().build();
 	}
 }

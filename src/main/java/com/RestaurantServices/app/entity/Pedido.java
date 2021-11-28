@@ -49,6 +49,10 @@ public class Pedido implements Serializable{
 	@Column(name = "observacion", length = 50)
 	private String observacion;
 	
+	@Column(name = "cliente", length = 50)
+	private String cliente;
+	
+	
 	@Column(name = "estado", length = 25, nullable = false)
 	@Enumerated(value = EnumType.STRING)
 	private Estado estado;
@@ -59,22 +63,45 @@ public class Pedido implements Serializable{
 
 
 	
+	
+
+
+
+	public String getCliente() {
+		return cliente;
+	}
+
+
+
+
+
+
+
+	public void setCliente(String cliente) {
+		this.cliente = cliente;
+	}
+
+
+
+
+
+
+
 	public Pedido(List<Detalle_pedido> detalle_pedido, Empleado empleado, Mesa mesa, Date fecha_pedido,
-			String observacion, Estado estado) {
+			String observacion, String cliente, Estado estado) {
 		super();
-		
+		this.detalle_pedido = detalle_pedido;
 		this.empleado = empleado;
 		this.mesa = mesa;
 		Fecha_pedido = fecha_pedido;
 		this.observacion = observacion;
+		this.cliente = cliente;
 		this.estado = estado;
-		
-//		for (Detalle_pedido item : detalle_pedido) {
-//			item.setIdpedido(this);
-//		}
-		
-		this.detalle_pedido = detalle_pedido;
 	}
+
+
+
+
 
 
 

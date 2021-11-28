@@ -77,10 +77,10 @@ public class EmpleadoController {
 		return empleados;
 	}
 	
-	@GetMapping("/login")
-	public Empleado login(@RequestBody Usuario usuario)
+	@GetMapping("/login/{id}")
+	public ResponseEntity<?> login(@PathVariable (value = "id") Long id)
 	{
-		Empleado e =new Empleado();
+		/*Empleado e =new Empleado();
 		List<Empleado> empleados= StreamSupport
 				.stream(empleadoInterface.findAll().spliterator(), false)
 				.collect(Collectors.toList());
@@ -103,9 +103,14 @@ public class EmpleadoController {
 			}
 			
 			
-		}
+		}*/
+		 
+		Empleado e = empleadoInterface.getUserById(id);
 		
-				
-		return e;
+		if(e == null) {
+			return ResponseEntity.notFound().build();
+		}else {
+			return ResponseEntity.status(HttpStatus.ACCEPTED).body(e);
+		}
 	}
 }

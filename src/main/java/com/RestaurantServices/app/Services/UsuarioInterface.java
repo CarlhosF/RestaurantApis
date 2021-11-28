@@ -23,5 +23,5 @@ public Iterable<Usuario> findAll();
 	
 	public void deleteById(long id);
 	
-	public boolean verifyUser(Usuario usuario);
+	public Usuario verifyUser(Usuario usuario);
 }
